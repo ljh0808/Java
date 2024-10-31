@@ -140,3 +140,162 @@ stack.pop(); // 30
 - 데이터의 중복을 허용하지 않고 순서를 유지하지 않는 데이터의 집합 리스트
 - 순서 자체가 없으므로 인덱스로 검색해서 가져오는 `get(index)` 메서드도 존재하지 않음
 - 중복 저장이 불가능하며, null 값도 하나만 저장할 수 있음
+
+---
+## **HashSet 클래스**
+
+- 배열과 연결 노드를 결합한 자료구조 형태
+- 가장 빠른 임의 검색 접근 속도를 가진다
+- 추가,삭제,검색,접근성이 모두 뛰어남
+- 순서를 예측할 수 없음
+
+```java
+Set<Integer> hashSet = new HashSet<>();
+
+hashSet.add(10);
+hashSet.add(20);
+hashSet.add(30);
+hashSet.add(10);  // 중복된 요소 추가 X
+
+hashSet.size(); // 3
+
+hashSet.toString(); // [20 , 10 , 30]  자료순서 예측 X
+```
+
+---
+## **LinkedHashSet 클래스**
+- 순서를 가지는 Set 자료
+- 추가된 순서 또는 가장 최근에 접근한 순서대로 접근 가능
+- 중복을 제거하는 동시에 저장한 순서를 유지하고 싶다면, HashSet 대신 LinkedHashSEt을 사용하면 된다.
+
+---
+## **TreeSet 클래스**
+- 이진 검색 트리(binary search tree) 자료구조의 형태로 데이터를 저장
+- 중복을 허용하지 않고, 순서를 가지지 않음
+- 데이터를 정렬 하여 저장하고 있다는 것이 특징
+- 정렬,검색,범위 검색에 높은 성능을 보임
+
+``` java
+
+Set<Integer> treeSet = new TreeSet<>();
+
+treeSet.add(7);
+treeSet.add(4);
+treeSet.add(9);
+treeSet.add(1);
+treeSet.add(5);
+
+treesSet.toString(); // [1,4,5,7,9] - 자료가 알아서 정렬
+```
+
+---
+## **EnumSet 추상클래스**
+- Enum 클래스와 함께 동작하는 Set 컬렉션
+- 중복 되지 않은 상수 그룹을 나타내는데 사용
+- 산술 비트 연산을 사용하여 구현되므로 HashSet보다 훨씬 빠르며 적은메모리를 사용함
+- 단, enum 타입의 요소값만 저장할 수 있고, 모든 요소들은 동일한 enum 객체에 소속되어야 함
+- EnumSet은 추상클래스 이고, 이를 상속한 RegularEnumSet 혹은 JumboEnumSet 객체를 사용하게 된다
+
+---
+## **Map 인터페이스**
+- 키(Key)와 값(value)의 쌍으로 연관지어 이루어진 데이터의 집합
+- 값은 중복가능 , 키는 중복X
+- 기존에 저장된 데이터와 중복된 키와 값을 저장하면 기존의 값은 없어지고 마지막에 저장된 값이 남게됨
+- 저장 순서가 유지되지 않음
+
+---
+## **Map.Entry인터페이스**
+- Map 인터페이스 안에 있는 내부 인터페이스
+- Key - value 쌍의 Node 내부 클래스가 이를 구현하고 있음
+- Map 자료구조를 보다 객체지향적인 설계를 하도록 유도하기 위한 것
+```java
+Map<String, Integer> map = new HashMap<>();
+map.put("a", 1);
+map.put("b", 2);
+map.put("c", 3);
+
+// Map.Entry 인터페이스를 구현하고 있는 Key-Value 쌍을 가지고 있는 HashMap의 Node 객체들의 Set 집합을 반환
+Set<Map.Entry<String, Integer>> entry = map.entrySet();
+
+System.out.println(entry); // [1=a, 2=b, 3=c]
+
+// Set을 순회하면서 Map.Entry를 구현한 Node 객체에서 key와 value를 얻어 출력
+for (Map.Entry<String, Integer> e : entry) {
+    System.out.printf("{ %s : %d }\n", e.getKey(), e.getValue());
+}
+
+```
+
+```출력결과
+{ a:1 }
+{ b:2 }
+{ c:3 }
+```
+---
+## **HashMap 클래스**
+- Hashtable을 보완한 컬렉션
+- 배열과 연결이 결합된 Hashing형태로, 키와 값을 묶어 하나의 데이터로 저장
+- 중복을 허용하지 않고, 순서를 보장하지 않음
+- 키와 값으로 null이 허용
+- 추가,삭제,검색,접근성이 모두 뛰어남
+- 비동기로 작동하기 때문에 멀티 쓰레드 환경에서는 어울리지 않음
+
+```java
+Map<String, String> hashMap = new HashMap<>();
+
+hashMap.put("love", "사랑");
+hashMap.put("apple", "사과");
+hashMap.put("baby", "아기");
+
+hashMap.get("apple"); // "사과"
+
+// hashmap의 key값들을 set 집합으로 반환하고 순회
+for(String key : hashMap.keySet()) {
+    System.out.println(key + " => " + hashMap.get(key));
+}
+/*
+love => 사랑
+apple => 사과
+baby => 아기
+*/
+```
+
+---
+## **LinkedHashMap 클래스**
+- HashMap을 상속하기 때문에 흡사하지만, Entry들이 연결 리스트를 구성하여 데이터의 순서를 보장
+- 들어온 순서대로 순서를 가진다
+
+---
+## 정리
+**ArrayList** 
+
+- 리스트 자료구조를 사용한다면 기본 선택
+- 임의의 요소에 대한 접근성이 뛰어남
+- 순차적인 추가/삭제 제일 빠름
+- 요소의 추가/삭제 불리
+
+
+**LinkedList**
+
+- 요소의 추가/삭제 유리
+- 임의의 요소에 대한 접근성이 좋지 않음
+
+
+**HashMap / HashSet**
+
+- 해싱을 이용해 임의의 요소에 대한 추가/삭제/검색/접근성 모두 뛰어남
+- 검색에 최고성능 ( get 메서드의 성능이 O(1) )
+
+
+**TreeMap / TreeSet**
+
+- 요소 정렬이 필요할때 검색(특히 범위검색)에 적합
+- 그래도 검색 성능은 HashMap보다 떨어짐
+
+
+**LinkedHashMap / LinkedHashSet**
+- HashMap과 HashSet에 저장 순서 유지 기능을 추가 <br/>
+
+ **Queue : 스택(LIFO) / 큐(FIFO)** 
+- 자료구조가 필요하면 ArrayDeque 사용
+- Stack, Hashtable : 가급적 사용 X (deprecated)
