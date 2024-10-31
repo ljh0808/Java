@@ -65,3 +65,78 @@ Collection 인터페이스와 분리되어 있음
 - **equals(Object o)**: 지정된 객체와 같은지 비교
 - **indexOf(Otject o)** " 지정된 객체가 있는 첫 번째 요소의 위치를 반환 , 만일 없을경우 -1을 반환
 - **clear()** : 모든 요소들을 제거
+
+---
+## **ArrayList 클래스**
+
+- 배열을 이용하여 만든 리스트
+- 데이터의 저장순서가 유지되고 중복을 허용
+- 데이터량에 따라 공간(capacity)가 자동으로 늘어나거나 줄어들음
+- 단방향 포인터 구조로 자료에 대한 순차적인 접근에 강점이 있어 조회가 빠름
+- 삽입/삭제가 느리다. 단, 순차적으로 추가/삭제하는 경우에는 가장 빠름
+```java
+List<String> arrayList = new ArrayList<>();
+
+arrayList.add("Hello");
+arrayList.add("World");
+
+arrayList.get(0); // "Hello"
+```
+---
+## **LinkedList 클래스**
+
+- 노드(객체)를 연결하여 리스트 처럼 만든 컬렉션
+- 데이터의 중간 삽입,삭제가 빈번할 경우 빠른 성능을 보장
+- 임의의 요소에 대한 접근 성능은 좋지 않음
+- 자바의 LinkedList는 양방향 포인터구조로 이루어져 있음
+- 스택,큐,트리 등의 자료구조의 근간이 된다
+
+```java
+List<String> linkedList = new LinkedList<>();
+linkedList.add("Hello");
+
+linkedList.get(0); //"Hello"
+```
+---
+## **Vector 클래스**
+- ArrayList의 구형 버전
+- ArrayList와의 차이는 모든메서드가 동기화 되어있어 Thread-Safe 하다는 점
+- 구버전 자바와 호환성을 위해 남겨두었으며, 잘 쓰이진 않음
+> 현업에서 컬렉션에 동기화가 필요하면 Collections.synchronizedList() 메서드를 이용해 ArrayList를 동기화 처리하여 사용한다.
+```java
+List<Integer> vector = new Vector<>();
+
+vector.add(10);
+vector.add(20);
+
+vector.get(0); // 10
+```
+---
+## **Stack 클래스**
+
+- 후입선출 LIFO(Last-In-First-Out) 자료구조
+- 마지막에 들어온 원소가 처음으로 나간다
+- 들어올때는 push, 나갈때는 pop
+- Vectort를 상속하기 때문에 문제점이 많아 잘 쓰이지 않음.
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(30);
+stack.push(50);
+
+stack.pop(); // 50
+stack.pop(); // 30
+```
+## **Queue 인터페이스**
+- 선입선출 FIFO(First-In-First-Out) 구조
+- 처음 들어온 원소가 가장먼저 출력
+- 자바에서는 Queue는 인터페이스이고 필요에 따라 큐 컬렉션을 골라 사용
+
+> 추가공부이후 정리예정
+
+---
+## **Set 인터페이스**
+
+- 데이터의 중복을 허용하지 않고 순서를 유지하지 않는 데이터의 집합 리스트
+- 순서 자체가 없으므로 인덱스로 검색해서 가져오는 `get(index)` 메서드도 존재하지 않음
+- 중복 저장이 불가능하며, null 값도 하나만 저장할 수 있음
